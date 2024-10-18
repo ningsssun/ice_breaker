@@ -1,4 +1,4 @@
-# Ice Breaker
+# 🧊 Ice Breaker
 A LangChain agent capable of generating personalized icebreakers based on public information from LinkedIn.
 
 ### Ice Breaker application performs the following tasks:
