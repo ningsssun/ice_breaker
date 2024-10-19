@@ -52,22 +52,41 @@
 
                 const formData = new FormData(form);
 
-                fetch("/process", {method: "POST", body: formData})
+                fetch("/process", {
+                    method: "POST",
+                    body: formData
+                })
                     .then(response => {
                         if (response.ok) return response.json();
                         throw new Error("POST request failed");
                     })
                     .then(data => {
-                        document.getElementById("profile-pic").src = data.picture_url;
-                        document.getElementById("summary").textContent = data.summary_and_facts.summary;
-                        createHtmlList(document.getElementById("facts"), data.summary_and_facts.facts);
-                        createHtmlList(document.getElementById("ice-breakers"), data.ice_breakers.ice_breakers);
-                        createHtmlList(document.getElementById("topics-of-interest"), data.interests.topics_of_interest);
+                        // Make sure to check if the data fields exist
+                        if (data.picture_url) {
+                            document.getElementById("profile-pic").src = data.picture_url;
+                        }
+                        if (data.summary_and_facts && data.summary_and_facts.summary) {
+                            document.getElementById("summary").textContent = data.summary_and_facts.summary;
+                        }
+                        if (data.summary_and_facts && data.summary_and_facts.facts) {
+                            createHtmlList(document.getElementById("facts"), data.summary_and_facts.facts);
+                        }
+                        if (data.ice_breakers && data.ice_breakers.ice_breakers) {
+                            createHtmlList(document.getElementById("ice-breakers"), data.ice_breakers.ice_breakers);
+                        }
+                        if (data.interests && data.interests.topics_of_interest) {
+                            createHtmlList(document.getElementById("topics-of-interest"), data.interests.topics_of_interest);
+                        }
 
-                        spinner.style.display = "none";
-                        result.style.display = "";
+                    // Hide the spinner and show the results
+                    spinner.style.display = "none";
+                    result.style.display = "";
 
-                    })
+                })
+                .catch(error => {
+                    console.error("Error during fetch:", error);
+                    // Handle errors or show some message to the user
+                });
             });
 
             function createHtmlList(element, items)
