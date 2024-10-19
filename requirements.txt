@@ -1,0 +1,11 @@
+attrs~=24.2.0
+Jinja2~=3.1.4
+setuptools~=75.1.0
+langchain-community~=0.3.2
+langchain~=0.3.3
+langchain-core~=0.3.12
+langchain-openai~=0.2.2
+python-dotenv~=1.0.1
+Flask~=3.0.3
+requests~=2.32.3
+pydantic~=2.9.2
