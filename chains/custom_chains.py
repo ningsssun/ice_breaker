@@ -62,3 +62,4 @@ def get_ice_breaker_chain() -> RunnableSequence:
     )
 
     return ice_breaker_prompt_template | llm | ice_breaker_parser
+
